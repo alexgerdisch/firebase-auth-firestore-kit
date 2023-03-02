@@ -1,7 +1,8 @@
 import './style.css'
 import { displayWorking } from './helper.js'
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDL9Vfw5AJKfmeeXFRlFuyMKvH16C8lyGk",
@@ -32,6 +33,9 @@ displayWorking();
 const app = initializeApp(firebaseConfig);
 console.log(app);
 
+//Initialize Firestore DB
+const db = getFirestore(app);
+
 
 const auth = getAuth();
 
@@ -51,7 +55,7 @@ registerForm.addEventListener("submit", event => {
     const errorMessage = error.message;
     console.error(error.code, error.message);
   }).finally(() => {
-    console.log("finally occured");
+    console.log("finally occured (registration)");
   })
 });
 
@@ -61,15 +65,20 @@ signInForm.addEventListener("submit", event => {
 
   console.log("Sign in attempted");
 
-  
-
-
-
+  signInWithEmailAndPassword(auth, signInEmail.value, signInPass.value)
+  .then(userCredential => {
+    const user = userCredential.user;
+    console.log(`signed in as ${user.email}`);
+  })
+  .catch(error => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.error(error.code, error.message);
+  }).finally(() => {
+    console.log("finally occured (sign-in)");
+  })
 
 });
-
-
-
 
 
 //check auth status
