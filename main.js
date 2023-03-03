@@ -2,7 +2,7 @@ import './style.css'
 import { displayWorking } from './helper.js'
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDL9Vfw5AJKfmeeXFRlFuyMKvH16C8lyGk",
@@ -22,7 +22,10 @@ const signOutButton = document.querySelector("#sign-out");
 const signInForm = document.querySelector("#sign-in-form");
 const signInEmail = document.querySelector("#sign-in-email");
 const signInPass = document.querySelector("#sign-in-password");
-
+const profileForm = document.querySelector("#profile-form");
+const companyName = document.querySelector("#company-name");
+const companyIndustry = document.querySelector("#industry");
+const allFormInputs = document.querySelectorAll(".form-fill");
 
 
 
@@ -35,8 +38,9 @@ console.log(app);
 
 //Initialize Firestore DB
 const db = getFirestore(app);
+console.log(db);
 
-
+// Store Auth Object
 const auth = getAuth();
 
 //register email user
@@ -46,17 +50,17 @@ registerForm.addEventListener("submit", event => {
   console.log("registration submitted")
 
   createUserWithEmailAndPassword(auth, registerEmail.value, registerPass.value)
-  .then(userCredential => {
-    const user = userCredential.user;
-    console.log(`signed in as ${user.email}`);
-  })
-  .catch(error => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.error(error.code, error.message);
-  }).finally(() => {
-    console.log("finally occured (registration)");
-  })
+    .then(userCredential => {
+      const user = userCredential.user;
+      console.log(`signed in as ${user.email}`);
+    })
+    .catch(error => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(error.code, error.message);
+    }).finally(() => {
+      console.log("finally occured (registration)");
+    })
 });
 
 //sign user in
@@ -66,38 +70,57 @@ signInForm.addEventListener("submit", event => {
   console.log("Sign in attempted");
 
   signInWithEmailAndPassword(auth, signInEmail.value, signInPass.value)
-  .then(userCredential => {
-    const user = userCredential.user;
-    console.log(`signed in as ${user.email}`);
-  })
-  .catch(error => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.error(error.code, error.message);
-  }).finally(() => {
-    console.log("finally occured (sign-in)");
-  })
+    .then(userCredential => {
+      const user = userCredential.user;
+      console.log(`signed in as ${user.email}`);
+    })
+    .catch(error => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(error.code, error.message);
+    }).finally(() => {
+      console.log("finally occured (sign-in)");
+    })
 
 });
 
 
 //check auth status
 checkAuthButton.addEventListener("click", () => {
-  console.log(auth.currentUser);
+  console.log(`current user: ${auth.currentUser?.email} - UID: ${auth.currentUser?.uid}`);
 });
 
 //sign user out
 signOutButton.addEventListener("click", () => {
+  allFormInputs.forEach(input => {
+    input.value = '';
+  });
   signOut(auth).then(() => {
     console.log("Sign-out successful")
   }).catch((error) => {
     console.error(error);
+  }).finally(() => {
+    console.log("finally (sign-out)");
   });
-})
+});
 
 
+//add profile data
+profileForm.addEventListener("submit", event => {
+  event.preventDefault();
+  const docRef = doc(db, "users", auth.currentUser?.uid);
 
+  console.log(`attempting data write to user: ${auth.currentUser?.uid}`);
 
+  setDoc(docRef, {
+    uid: auth.currentUser.uid,
+    email: auth.currentUser.email,
+    company: companyName.value,
+    industry: companyIndustry.value
+  }, { merge: true })
+    .catch(error => console.error(error));
+
+});
 
 
 
