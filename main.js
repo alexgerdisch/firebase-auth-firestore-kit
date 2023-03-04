@@ -2,8 +2,8 @@ import './style.css'
 import { displayWorking } from './helper.js'
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { addValue } from './addValue.js'
+import { getFirestore, doc, setDoc, arrayUnion } from "firebase/firestore";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDL9Vfw5AJKfmeeXFRlFuyMKvH16C8lyGk",
@@ -30,6 +30,7 @@ const allFormInputs = document.querySelectorAll(".form-fill");
 const addValueButton = document.querySelector("#add-value-button")
 const valueInput = document.querySelector("#value-input");
 const valueInsertionZone = document.querySelector(".value-insertion-zone");
+const valueForm = document.querySelector("#value-form");
 const registrationArea = document.querySelector("#registration-area");
 const signInArea = document.querySelector("#sign-in-area");
 const authenticatedSection = document.querySelector("#logged-in");
@@ -144,11 +145,43 @@ profileForm.addEventListener("submit", event => {
     uid: auth.currentUser.uid,
     email: auth.currentUser.email,
     company: companyName.value,
-    industry: companyIndustry.value
+    industry: companyIndustry.value,
   }, { merge: true })
     .catch(error => console.error(error));
 
 });
+
+// add value func and firebase array write
+const addValue = (targetElement, insertionPoint, button) => {
+
+  const valueArray = [];
+
+  button.addEventListener("click", event => {
+      event.preventDefault();
+
+      valueArray.push(targetElement.value);
+      console.log(valueArray);
+      insertionPoint.insertAdjacentHTML("beforeend", `<p class="value">${targetElement.value}<p>`)
+      targetElement.value = '';
+
+  });
+
+  valueForm.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const docRef = doc(db, "users", auth.currentUser?.uid);
+
+    console.log(`attempting write value array`);
+
+    setDoc(docRef, {
+      valueDrivers: arrayUnion(...valueArray)
+    }, { merge: true })
+      .catch(error => console.error(error));
+
+
+  });
+
+}
 
 
 //add
