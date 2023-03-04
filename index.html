@@ -9,37 +9,59 @@
 </head>
 
 <body>
-  <h1>Pwofi :)</h1>
-  <h2>Register Now</h2>
-  <form id="registration-form">
-    <label for="reg-email">Enter Email</label>
-    <input class="form-fill" type="email" name="reg-email" id="registration-email">
-    <label for="reg-pass">Enter Password</label>
-    <input class="form-fill" type="password" name="reg-pass" id="registration-password">
-    <input type="submit" value="Submit">
-  </form>
-  <h2>Sign Back In</h2>
-  <form id="sign-in-form">
-    <label for="sign-in-email">Enter Email</label>
-    <input class="form-fill" type="email" name="sign-in-email" id="sign-in-email">
-    <label for="reg-pass">Enter Password</label>
-    <input class="form-fill" type="password" name="sign-in-pass" id="sign-in-password">
-    <input type="submit" value="Submit">
-  </form>
+  <h1>Pwofi 🚀</h1>
+  <div id="registration-area">
+    <h2>Register Now</h2>
+    <form id="registration-form">
+      <label for="reg-email">Enter Email</label>
+      <input class="form-fill" type="email" name="reg-email" id="registration-email">
+      <label for="reg-pass">Enter Password</label>
+      <input class="form-fill" type="password" name="reg-pass" id="registration-password">
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+  <div id="sign-in-area">
+    <h2>Sign Back In</h2>
+    <form id="sign-in-form">
+      <label for="sign-in-email">Enter Email</label>
+      <input class="form-fill" type="email" name="sign-in-email" id="sign-in-email">
+      <label for="reg-pass">Enter Password</label>
+      <input class="form-fill" type="password" name="sign-in-pass" id="sign-in-password">
+      <input type="submit" value="Submit">
+    </form>
+  </div>
 
 
   <button id="check-auth">Check Auth</button>
   <button id="sign-out">Sign out</button>
 
-  <section id="profile-section">
-    <h3>Profile details</h3>
-    <form id="profile-form">
-      <label for="company-name">Company</label>
-      <input class="form-fill" type="text" name="company-name" id="company-name">
-      <label for="industry">Industry</label>
-      <input class="form-fill" type="text" name="industry-input" id="industry">
-      <input type="submit" value="Submit">
-    </form>
+
+  <section id="logged-in">
+    <div class="profile-inputs">
+      <h3>Profile details</h3>
+      <form id="profile-form">
+        <label for="company-name">Company</label>
+        <input class="form-fill" type="text" name="company-name" id="company-name">
+        <label for="industry">Industry</label>
+        <input class="form-fill" type="text" name="industry-input" id="industry">
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
+    <div id="value-inputs">
+      <h3>Company Value Drivers</h3>
+      <form id="value-form">
+        <label for="value">Enter Value Driver(s)</label>
+        <input class="form-fill" type="text" name="value" id="value-input">
+        <button id="add-value-button">+</button>
+        <br>
+        <div class="value-insertion-zone"></div>
+        <input type="submit" value="Submit">
+      </form>
+
+
+    </div>
+
 
 
   </section>

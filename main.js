@@ -3,6 +3,7 @@ import { displayWorking } from './helper.js'
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { addValue } from './addValue.js'
 
 const firebaseConfig = {
   apiKey: "AIzaSyDL9Vfw5AJKfmeeXFRlFuyMKvH16C8lyGk",
@@ -26,6 +27,12 @@ const profileForm = document.querySelector("#profile-form");
 const companyName = document.querySelector("#company-name");
 const companyIndustry = document.querySelector("#industry");
 const allFormInputs = document.querySelectorAll(".form-fill");
+const addValueButton = document.querySelector("#add-value-button")
+const valueInput = document.querySelector("#value-input");
+const valueInsertionZone = document.querySelector(".value-insertion-zone");
+const registrationArea = document.querySelector("#registration-area");
+const signInArea = document.querySelector("#sign-in-area");
+const authenticatedSection = document.querySelector("#logged-in");
 
 
 
@@ -42,6 +49,23 @@ console.log(db);
 
 // Store Auth Object
 const auth = getAuth();
+
+//Render correct view 
+// (DISABLES login/register forms while logged in, disables details while logged out)
+
+const renderView = () => {
+  if (auth.currentUser?.uid) {
+    registrationArea.style.display = "none";
+    signInArea.style.display = "none";
+    authenticatedSection.style.display = '';
+  } else {
+    registrationArea.style.display = '';
+    signInArea.style.display = '';
+    authenticatedSection.style.display = "none";
+  }
+}
+
+renderView();
 
 //register email user
 registerForm.addEventListener("submit", event => {
@@ -60,6 +84,7 @@ registerForm.addEventListener("submit", event => {
       console.error(error.code, error.message);
     }).finally(() => {
       console.log("finally occured (registration)");
+      renderView();
     })
 });
 
@@ -80,6 +105,7 @@ signInForm.addEventListener("submit", event => {
       console.error(error.code, error.message);
     }).finally(() => {
       console.log("finally occured (sign-in)");
+      renderView();
     })
 
 });
@@ -88,6 +114,7 @@ signInForm.addEventListener("submit", event => {
 //check auth status
 checkAuthButton.addEventListener("click", () => {
   console.log(`current user: ${auth.currentUser?.email} - UID: ${auth.currentUser?.uid}`);
+  renderView();
 });
 
 //sign user out
@@ -101,11 +128,12 @@ signOutButton.addEventListener("click", () => {
     console.error(error);
   }).finally(() => {
     console.log("finally (sign-out)");
+    renderView();
   });
 });
 
 
-//add profile data
+//add profile data && automatically create new document for user if not exisitng
 profileForm.addEventListener("submit", event => {
   event.preventDefault();
   const docRef = doc(db, "users", auth.currentUser?.uid);
@@ -121,6 +149,10 @@ profileForm.addEventListener("submit", event => {
     .catch(error => console.error(error));
 
 });
+
+
+//add
+addValue(valueInput, valueInsertionZone, addValueButton);
 
 
 
