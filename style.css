@@ -14,7 +14,6 @@
   -webkit-text-size-adjust: 100%;
 }
 
-
 a {
   font-weight: 500;
   color: #646cff;
@@ -73,6 +72,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin-top: 5px;
 }
 
 button:hover {
@@ -82,6 +82,10 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.profile-details-show {
+  display: "";
 }
 
 /* @media (prefers-color-scheme: light) {

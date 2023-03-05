@@ -24,6 +24,8 @@ const signInForm = document.querySelector("#sign-in-form");
 const signInEmail = document.querySelector("#sign-in-email");
 const signInPass = document.querySelector("#sign-in-password");
 const profileForm = document.querySelector("#profile-form");
+const firstName = document.querySelector("#first-name");
+const lastName = document.querySelector("#last-name");
 const companyName = document.querySelector("#company-name");
 const companyIndustry = document.querySelector("#industry");
 const allFormInputs = document.querySelectorAll(".form-fill");
@@ -31,9 +33,16 @@ const addValueButton = document.querySelector("#add-value-button")
 const valueInput = document.querySelector("#value-input");
 const valueInsertionZone = document.querySelector(".value-insertion-zone");
 const valueForm = document.querySelector("#value-form");
+const addPainButton = document.querySelector("#add-pain-button");
+const painInput = document.querySelector("#pain-input");
+const painInsertionZone = document.querySelector(".pain-insertion-zone");
+const painForm = document.querySelector("#pain-form");
 const registrationArea = document.querySelector("#registration-area");
 const signInArea = document.querySelector("#sign-in-area");
 const authenticatedSection = document.querySelector("#logged-in");
+const profileDetails = document.querySelector("#profile-details");
+const profileSettingsButton = document.querySelector("#profile-settings");
+
 
 
 
@@ -59,13 +68,13 @@ const renderView = () => {
     registrationArea.style.display = "none";
     signInArea.style.display = "none";
     authenticatedSection.style.display = '';
+    profileDetails.style.display = "none";
   } else {
     registrationArea.style.display = '';
     signInArea.style.display = '';
     authenticatedSection.style.display = "none";
   }
 }
-
 renderView();
 
 //register email user
@@ -112,10 +121,21 @@ signInForm.addEventListener("submit", event => {
 });
 
 
+
+
 //check auth status
 checkAuthButton.addEventListener("click", () => {
   console.log(`current user: ${auth.currentUser?.email} - UID: ${auth.currentUser?.uid}`);
   renderView();
+});
+
+// open profile settings
+profileSettingsButton.addEventListener("click", () => {
+  if (profileDetails.style.display === "none") {
+    profileDetails.style.display = "";
+  } else profileDetails.style.display = "none";
+  
+  console.log("GRRR");
 });
 
 //sign user out
@@ -143,12 +163,13 @@ profileForm.addEventListener("submit", event => {
 
   setDoc(docRef, {
     uid: auth.currentUser.uid,
+    userFirstName: firstName.value,
+    userLastName: lastName.value,
     email: auth.currentUser.email,
     company: companyName.value,
     industry: companyIndustry.value,
   }, { merge: true })
     .catch(error => console.error(error));
-
 });
 
 // add value func and firebase array write
@@ -177,18 +198,42 @@ const addValue = (targetElement, insertionPoint, button) => {
       valueDrivers: arrayUnion(...valueArray)
     }, { merge: true })
       .catch(error => console.error(error));
-
-
   });
-
 }
-
 
 //add
 addValue(valueInput, valueInsertionZone, addValueButton);
 
+// Add painpoints and write array to firestore
+const addPain = (targetElement, insertionPoint, button) => {
 
+  const painArray = [];
 
+  button.addEventListener("click", event => {
+    event.preventDefault();
+
+    painArray.push(targetElement.value);
+    console.log(painArray);
+    insertionPoint.insertAdjacentHTML("beforeend", `<p class="pain">${targetElement.value}<p>`)
+    targetElement.value = '';
+
+  });
+
+  painForm.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const docRef = doc(db, "users", auth.currentUser?.uid);
+
+    console.log(`attempting write to pain array`);
+
+    setDoc(docRef, {
+      painPoints: arrayUnion(...painArray)
+    }, { merge: true })
+      .catch(error => console.error(error));
+  });
+}
+
+addPain(painInput, painInsertionZone, addPainButton)
 
 
 
