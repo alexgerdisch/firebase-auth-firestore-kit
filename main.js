@@ -134,7 +134,7 @@ profileSettingsButton.addEventListener("click", () => {
   if (profileDetails.style.display === "none") {
     profileDetails.style.display = "";
   } else profileDetails.style.display = "none";
-  
+
   console.log("GRRR");
 });
 
@@ -178,12 +178,12 @@ const addValue = (targetElement, insertionPoint, button) => {
   const valueArray = [];
 
   button.addEventListener("click", event => {
-      event.preventDefault();
+    event.preventDefault();
 
-      valueArray.push(targetElement.value);
-      console.log(valueArray);
-      insertionPoint.insertAdjacentHTML("beforeend", `<p class="value">${targetElement.value}<p>`)
-      targetElement.value = '';
+    valueArray.push(targetElement.value);
+    console.log(valueArray);
+    insertionPoint.insertAdjacentHTML("beforeend", `<p class="value">${targetElement.value}<p>`)
+    targetElement.value = '';
 
   });
 
@@ -237,9 +237,14 @@ addPain(painInput, painInsertionZone, addPainButton)
 
 
 
+// Test requst to emulated Firebase Functions
 
+const getResponse = async () => {
+  const response = await fetch('http://127.0.0.1:5001/pwofibeta/us-central1/api');
+  console.log(response);
+}
 
-
+getResponse();
 
 
 
