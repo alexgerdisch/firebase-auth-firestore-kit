@@ -237,15 +237,6 @@ addPain(painInput, painInsertionZone, addPainButton)
 
 
 
-// Test requst to emulated Firebase Functions
-
-const getResponse = async () => {
-  const response = await fetch('http://127.0.0.1:5001/pwofibeta/us-central1/api');
-  console.log(response);
-}
-
-getResponse();
-
 
 
 
