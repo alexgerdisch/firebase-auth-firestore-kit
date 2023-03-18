@@ -231,6 +231,7 @@ const addPain = (targetElement, insertionPoint, button) => {
     }, { merge: true })
       .catch(error => console.error(error));
   });
+
 }
 
 addPain(painInput, painInsertionZone, addPainButton)

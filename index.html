@@ -11,41 +11,47 @@
 <body>
 
   <nav>
-    <h1>Pwofi 🚀</h1>
+    <img src="pwofi-logo-v2.png" alt="Logo" class="logo">
     <!-- TODO move  -->
-
-
 
   </nav>
 
-  <div id="registration-area">
-    <h2>Register Now</h2>
-    <form id="registration-form">
-      <label for="reg-email">Enter Email</label>
-      <input class="form-fill" type="email" name="reg-email" id="registration-email">
-      <label for="reg-pass">Enter Password</label>
-      <input class="form-fill" type="password" name="reg-pass" id="registration-password">
-      <input type="submit" value="Submit">
-    </form>
-  </div>
-  <div id="sign-in-area">
-    <h2>Sign In</h2>
-    <form id="sign-in-form">
-      <label for="sign-in-email">Enter Email</label>
-      <input class="form-fill" type="email" name="sign-in-email" id="sign-in-email">
-      <label for="reg-pass">Enter Password</label>
-      <input class="form-fill" type="password" name="sign-in-pass" id="sign-in-password">
-      <input type="submit" value="Submit">
-    </form>
-  </div>
 
-  <button id="profile-settings">Profile Settings</button>
+  <section id="auth-section">
+    <div id="registration-area">
+      <h2>Register Now</h2>
+      <form id="registration-form">
+        <label for="reg-email">Enter Email</label>
+        <input class="form-fill" type="email" name="reg-email" id="registration-email">
+        <label for="reg-pass">Enter Password</label>
+        <input class="form-fill" type="password" name="reg-pass" id="registration-password">
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <div id="sign-in-area">
+      <h2>Sign In</h2>
+      <form id="sign-in-form">
+        <label for="sign-in-email">Enter Email</label>
+        <input class="form-fill" type="email" name="sign-in-email" id="sign-in-email">
+        <label for="reg-pass">Enter Password</label>
+        <input class="form-fill" type="password" name="sign-in-pass" id="sign-in-password">
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
+  </section>
+
+
+
+
   <button id="check-auth">Check Auth</button>
-  <button id="sign-out">Sign out</button>
+
 
 
 
   <section id="logged-in">
+    <button id="sign-out">Sign out</button>
+    <button id="profile-settings">Profile Settings</button>
 
     <div id="profile-details">
 

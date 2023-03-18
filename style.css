@@ -14,6 +14,8 @@
   -webkit-text-size-adjust: 100%;
 }
 
+
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -76,7 +78,7 @@ button {
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: #68acc9;
 }
 
 button:focus,
@@ -86,6 +88,15 @@ button:focus-visible {
 
 .profile-details-show {
   display: "";
+}
+
+#logged-in {
+  margin: 10px;
+}
+
+.logo {
+  width: 150px;
+  height: 150px;
 }
 
 /* @media (prefers-color-scheme: light) {
