@@ -14,11 +14,12 @@
   <nav class="top-bar">
     <img src="pwofi-logo-v2.png" alt="Logo" class="logo">
     <!-- TODO move  -->
-
-    <button id="check-auth">Check Auth</button>
-    <button id="profile-settings">Profile Settings</button>
-
-    <button id="sign-out">Sign out</button>
+    <div class="button-container">
+      <button id="check-auth">Check Auth</button>
+      <button id="profile-settings">Profile Settings</button>
+      <button id="sign-out">Sign out</button>
+    </div>
+    
   </nav>
 
 
@@ -51,18 +52,24 @@
 
     <section id="work-area">
 
-      <h2>Welcome to Pwofi</h2>
-      <div id="action-bar">
-        <button class="action-btn" id="cold-outreach">Cold Outreach 🥶</button>
-        <button class="action-btn" id="follow-up">Follow-up 👋</button>
-        <button class="action-btn" id="referral">Referral 🤝</button>
-        <button class="action-btn" id="custom-request">Custom ⚙️</button>
-      </div>
+      <h2>Get started, generate a message:</h2>
+      
 
-      <div id="response-area"></div>
+      <div id="response-area">
+        <div class="response system" id="initial-response">
+          Welcome to Pwofi, what are we working on?
+        </div>
+        <div id="action-bar">
+          <button class="action-btn" id="cold-outreach">Cold Outreach 🥶</button>
+          <button class="action-btn" id="follow-up">Follow-up 👋</button>
+          <button class="action-btn" id="referral">Referral 🤝</button>
+          <button class="action-btn" id="custom-request">Custom ⚙️</button>
+        </div>
+      </div>
 
       <form id="request-form">
         <input type="text" name="request" id="request-input">
+        <input type="submit" value="Send" id="request-btn">
       </form>
 
 
@@ -118,9 +125,6 @@
         </form>
       </div>
     </div>
-
-
-
   </section>
 
 

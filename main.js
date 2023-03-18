@@ -42,6 +42,7 @@ const signInArea = document.querySelector("#sign-in-area");
 const authenticatedSection = document.querySelector("#logged-in");
 const profileDetails = document.querySelector("#profile-details");
 const profileSettingsButton = document.querySelector("#profile-settings");
+const requestForm = document.querySelector("#request-form");
 
 
 
@@ -239,6 +240,10 @@ const addPain = (targetElement, insertionPoint, button) => {
 
 addPain(painInput, painInsertionZone, addPainButton)
 
+requestForm.addEventListener("submit", event => {
+  event.preventDefault();
+
+})
 
 
 

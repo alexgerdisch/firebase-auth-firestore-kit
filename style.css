@@ -48,7 +48,6 @@ h1 {
 
 .logo {
   height: 6em;
-  padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
@@ -72,8 +71,8 @@ button {
   background-color: #2b2a2a;
   cursor: pointer;
   transition: border-color 0.25s;
-  margin: 20px;
-  width: 200px;
+  margin: 5px;
+  width: 175px;
 }
 
 button:hover {
@@ -113,13 +112,33 @@ input[type=submit] {
 #work-area {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 #response-area {
-  background-color: bisque;
+  /* background-color: rgb(77, 79, 78); */
   height: 500px;
-  width: 750px;
+  width: 800px;
+  display: flex;
+  flex-direction: column; 
 }
+
+#request-input {
+  width: 750px;
+  height: 35px;
+}
+
+#request-btn {
+  height: 39px;
+}
+
+/* #action-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+
+} */
 
 /* @media (prefers-color-scheme: light) {
   :root {
