@@ -46,6 +46,7 @@ const profileSettingsButton = document.querySelector("#profile-settings");
 
 
 
+
 // testing function (local import)
 displayWorking();
 
@@ -76,6 +77,8 @@ const renderView = () => {
   }
 }
 renderView();
+
+
 
 //register email user
 registerForm.addEventListener("submit", event => {
